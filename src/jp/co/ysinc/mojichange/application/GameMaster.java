@@ -1,5 +1,7 @@
 package jp.co.ysinc.mojichange.application;
 
+import jp.co.ysinc.mojichange.application.app_interface.Inputable;
+import jp.co.ysinc.mojichange.application.app_interface.Outputtable;
 import jp.co.ysinc.mojichange.ui.Output;
 
 /**
@@ -7,16 +9,24 @@ import jp.co.ysinc.mojichange.ui.Output;
  */
 public class GameMaster {
 
-    private Output output;
     private ScoreManager manager;
+    private Inputable inputable;
+    private Outputtable outputtable;
 
     public GameMaster() {
-        output = new Output();
         manager = new ScoreManager();
     }
 
     public void startGame() {
-        output.tellGameStart();
+        outputtable.show();
+    }
+
+    public void register(Inputable inputable) {
+        this.inputable = inputable;
+    }
+
+    public void registerOutput() {
+
     }
 
 }
