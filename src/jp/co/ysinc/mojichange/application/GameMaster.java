@@ -2,6 +2,7 @@ package jp.co.ysinc.mojichange.application;
 
 import jp.co.ysinc.mojichange.application.app_interface.Inputable;
 import jp.co.ysinc.mojichange.application.app_interface.Outputtable;
+import jp.co.ysinc.mojichange.ui.BufferedInput;
 import jp.co.ysinc.mojichange.ui.Output;
 
 /**
@@ -10,23 +11,17 @@ import jp.co.ysinc.mojichange.ui.Output;
 public class GameMaster {
 
     private ScoreManager manager;
-    private Inputable inputable;
-    private Outputtable outputtable;
+    private Inputable input;
+    private Outputtable output;
 
     public GameMaster() {
         manager = new ScoreManager();
+        input = new BufferedInput();
+        output = new Output();
     }
 
     public void startGame() {
-        outputtable.show();
-    }
-
-    public void register(Inputable inputable) {
-        this.inputable = inputable;
-    }
-
-    public void registerOutput() {
-
+        output.show("moji change test test test");
     }
 
 }
