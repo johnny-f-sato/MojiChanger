@@ -1,0 +1,10 @@
+{
+  "game_start": [
+    "対戦型文字入れ替えゲーム MOJ!",
+    "プレイヤーの名前を入力してください"
+  ],
+
+  "game_end": [
+    "Thank you for playing !!"
+  ]
+}
