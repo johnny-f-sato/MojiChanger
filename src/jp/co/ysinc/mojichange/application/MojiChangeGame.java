@@ -6,7 +6,8 @@ package jp.co.ysinc.mojichange.application;
 public class MojiChangeGame {
 
     public static void main(String[] arguments) {
-        new GameMaster().startGame();
+        GameMaster gm = new GameMaster();
+        gm.startGame();
     }
 
 }
