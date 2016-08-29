@@ -9,9 +9,9 @@ import java.io.FileReader;
 /**
  * Created by fumiya on 2016/08/02.
  */
-public class JsonParser {
+public class ResourceManager {
 
-    public static <T> T parseJsonFile(String path, Class<T> clazz) {
+    public static <T> T parseResourceFile(String path, Class<T> clazz) {
         try {
             File file = new File(path);
             FileReader reader = new FileReader(file);
