@@ -11,7 +11,7 @@ import java.io.InputStreamReader;
  */
 public class BufferedInput implements Inputtable {
     @Override
-    public String input(String input) {
+    public String input() {
         String str = "";
         BufferedReader reader =
                 new BufferedReader(new InputStreamReader(System.in));

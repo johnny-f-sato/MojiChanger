@@ -9,8 +9,10 @@ public class Player {
     private String name;
     private Score score;
 
-    public Player(String playerName) {
-        this.name = playerName;
+    private Boolean isPlayContinuing;
+
+    public void setPlayerName(String name) {
+        this.name = name;
     }
 
     public String getPlayerName() {
@@ -19,5 +21,16 @@ public class Player {
 
     public Score getScore() {
         return this.score;
+    }
+
+    public void setIsPlayContinuing(Boolean isContinue) {
+        this.isPlayContinuing = isContinue;
+    }
+
+    public Boolean isContinuePlaying() {
+        if (isPlayContinuing == null) {
+            return Boolean.FALSE;
+        }
+        return this.isPlayContinuing;
     }
 }

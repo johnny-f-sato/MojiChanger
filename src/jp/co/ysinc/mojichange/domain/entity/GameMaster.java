@@ -10,31 +10,68 @@ import jp.co.ysinc.mojichange.ui.interfaces.Outputtable;
 public class GameMaster {
 
     private ScoreManager manager;
-    private Inputtable input;
-    private Outputtable output;
+    private Inputtable in;
+    private Outputtable out;
 
     private Resource resource;
 
-    public GameMaster(Inputtable input, Outputtable output) {
+    private Player player;
+
+    public GameMaster(Inputtable in, Outputtable out) {
         manager = new ScoreManager();
-        this.input = input;
-        this.output = output;
+        this.in = in;
+        this.out = out;
 
         init();
     }
 
     public void startGame() {
-        //操作方法を表示する
-        for (String explain : resource.game_explain) {
-            output.show(explain);
-            if (explain.contains("Q.")) {
-                output.show(input.input(null));
+        showGameStart();
+        showGameExplain();
+        // debug
+        if (player.isContinuePlaying()) {
+            out.show(player.getPlayerName() + "さんは、このあとゲームつづける！");
+        }
+    }
+
+    private void showGameStart() {
+        for (String s : resource.game_start) {
+            out.show(s);
+        }
+
+        player.setPlayerName(in.input());
+    }
+
+    private void showGameExplain() {
+        String answer = "あぶらそば";
+        String playerAnswer = "";
+
+        for (String s : resource.game_explain) {
+            if (s.contains("A. あぶらそば")) {
+                while (!answer.equals(playerAnswer)) {
+                    playerAnswer = in.input();
+                }
+            }
+
+            out.show(s);
+        }
+
+        while (true) {
+            String isContinuing = in.input();
+            if (isContinuing.equals("S")) {
+                player.setIsPlayContinuing(true);
+                return;
+            }
+
+            if (isContinuing.equals("E")) {
+                return;
             }
         }
     }
 
     private void init() {
+        //initをThread化する日も近いかもしれないね
+        this.player = new Player();
         this.resource = ResourceFactory.newResource();
     }
-
 }
