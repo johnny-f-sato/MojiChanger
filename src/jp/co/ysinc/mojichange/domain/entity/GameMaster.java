@@ -32,6 +32,9 @@ public class GameMaster {
         if (player.isContinuePlaying()) {
             out.show(player.getPlayerName() + "さんは、このあとゲームつづける！");
         }
+
+        Timer timer = Timer.newInstace(10);
+        
     }
 
     private void showGameStart() {
