@@ -9,10 +9,11 @@ import jp.co.ysinc.mojichange.ui.interfaces.Outputtable;
  */
 public class GameMaster {
 
+    private boolean isGaming;
+
     private ScoreManager manager;
     private Inputtable in;
     private Outputtable out;
-
     private Resource resource;
 
     private Player player;
@@ -25,16 +26,34 @@ public class GameMaster {
         init();
     }
 
+    private void init() {
+        //initをThread化する日も近いかもしれないね
+        this.isGaming = true;
+        this.player = new Player();
+        this.resource = ResourceFactory.newResource();
+    }
+
+    @SuppressWarnings("StatementWithEmptyBody")
     public void startGame() {
         showGameStart();
         showGameExplain();
-        // debug
-        if (player.isContinuePlaying()) {
-            out.show(player.getPlayerName() + "さんは、このあとゲームつづける！");
-        }
+
+        System.out.println("main thread start, gaming state is " + isGaming);
 
         Timer timer = Timer.newInstace(10);
-        
+        timer.start(() -> {
+            isGaming = false;
+            System.out.println("sub thread end");
+            System.out.println("isGaming: " + isGaming);
+        });
+
+        while (!isGaming) {
+            startGameLogic();
+        }
+    }
+
+    private void startGameLogic() {
+
     }
 
     private void showGameStart() {
@@ -70,11 +89,5 @@ public class GameMaster {
                 return;
             }
         }
-    }
-
-    private void init() {
-        //initをThread化する日も近いかもしれないね
-        this.player = new Player();
-        this.resource = ResourceFactory.newResource();
     }
 }
