@@ -4,19 +4,19 @@ import jp.co.ysinc.mojichange.domain.factory.ResourceFactory;
 import jp.co.ysinc.mojichange.ui.interfaces.Inputtable;
 import jp.co.ysinc.mojichange.ui.interfaces.Outputtable;
 
+import java.util.Collections;
+
 /**
  * Created by Fumiya on 2016/04/02.
  */
 public class GameMaster {
 
-    private boolean isGaming;
-
-    private ScoreManager manager;
     private Inputtable in;
     private Outputtable out;
-    private Resource resource;
 
     private Player player;
+    private Resource resource;
+    private ScoreManager manager;
 
     public GameMaster(Inputtable in, Outputtable out) {
         manager = new ScoreManager();
@@ -28,32 +28,35 @@ public class GameMaster {
 
     private void init() {
         //initをThread化する日も近いかもしれないね
-        this.isGaming = true;
         this.player = new Player();
+        this.manager = new ScoreManager();
         this.resource = ResourceFactory.newResource();
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
     public void startGame() {
         showGameStart();
         showGameExplain();
 
-        System.out.println("main thread start, gaming state is " + isGaming);
+        System.out.println("main thread start !");
 
-        Timer timer = Timer.newInstace(10);
+        Timer timer = Timer.newInstace(30);
         timer.start(() -> {
-            isGaming = false;
             System.out.println("sub thread end");
-            System.out.println("isGaming: " + isGaming);
+
+            System.exit(0);
         });
 
-        while (!isGaming) {
-            startGameLogic();
-        }
+        startGameLogic();
     }
 
     private void startGameLogic() {
-
+        // 問題を出す
+        Collections.shuffle(resource.question);
+        for (String question : resource.question) {
+            MojiCard card = new MojiCard(question);
+            out.show(card.getQuestion());
+            in.input();
+        }
     }
 
     private void showGameStart() {

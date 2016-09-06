@@ -23,27 +23,23 @@ public class Timer {
 
     public void start(TimeUpHandler handler) {
         thread = new Thread(() -> {
+            int countDown = 10;
             for (int i=0; i < duration; i++) {
                 try {
                     Thread.sleep(1000);
-                    System.out.println(i+1);
+                    if (i >= (duration - 10)) {
+                        System.out.print("\r" + (countDown--));
+                    }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
 
+            System.out.println();
             handler.timeUp();
         });
 
         thread.start();
-    }
-
-    public void join() {
-        try {
-            thread.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
     }
 
     public interface TimeUpHandler {
