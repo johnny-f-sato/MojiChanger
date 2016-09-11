@@ -27,7 +27,6 @@ public class GameMaster {
     }
 
     private void init() {
-        //initをThread化する日も近いかもしれないね
         this.player = new Player();
         this.manager = new ScoreManager();
         this.resource = ResourceFactory.newResource();
@@ -39,12 +38,8 @@ public class GameMaster {
 
         System.out.println("main thread start !");
 
-        Timer timer = Timer.newInstace(30);
-        timer.start(() -> {
-            System.out.println("sub thread end");
-
-            System.exit(0);
-        });
+        Timer timer = Timer.newInstace(20);
+        timer.start(new CustomHandler());
 
         startGameLogic();
     }
@@ -53,8 +48,7 @@ public class GameMaster {
         // 問題を出す
         Collections.shuffle(resource.question);
         for (String question : resource.question) {
-            MojiCard card = new MojiCard(question);
-            out.show(card.getQuestion());
+            out.show(new MojiCard(question).getQuestion());
             in.input();
         }
     }
@@ -91,6 +85,19 @@ public class GameMaster {
             if (isContinuing.equals("E")) {
                 return;
             }
+        }
+    }
+
+    class CustomHandler implements Timer.TimerHandler {
+        @Override
+        public void countDown() {
+
+        }
+
+        @Override
+        public void timeUp() {
+            out.show("sub thread end");
+            System.exit(0);
         }
     }
 }

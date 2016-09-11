@@ -21,15 +21,11 @@ public class Timer {
         return timer;
     }
 
-    public void start(TimeUpHandler handler) {
+    public void start(TimerHandler handler) {
         thread = new Thread(() -> {
-            int countDown = 10;
             for (int i=0; i < duration; i++) {
                 try {
                     Thread.sleep(1000);
-                    if (i >= (duration - 10)) {
-                        System.out.print("\r" + (countDown--));
-                    }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -42,7 +38,8 @@ public class Timer {
         thread.start();
     }
 
-    public interface TimeUpHandler {
+    public interface TimerHandler {
+        void countDown();
         void timeUp();
     }
 
