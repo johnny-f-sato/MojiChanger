@@ -1,6 +1,6 @@
 package jp.co.ysinc.mojichange.application;
 
-import jp.co.ysinc.mojichange.domain.entity.GameMaster;
+import jp.co.ysinc.mojichange.domain.entity.participant.GameMaster;
 import jp.co.ysinc.mojichange.ui.BufferedInput;
 import jp.co.ysinc.mojichange.ui.Output;
 

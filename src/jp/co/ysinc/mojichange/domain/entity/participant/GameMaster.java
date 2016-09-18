@@ -1,6 +1,10 @@
-package jp.co.ysinc.mojichange.domain.entity;
+package jp.co.ysinc.mojichange.domain.entity.participant;
 
+import jp.co.ysinc.mojichange.domain.entity.tools.Resource;
+import jp.co.ysinc.mojichange.domain.entity.tools.SentenceCard;
+import jp.co.ysinc.mojichange.domain.entity.tools.Timer;
 import jp.co.ysinc.mojichange.domain.factory.ResourceFactory;
+import jp.co.ysinc.mojichange.infrastructure.ResourceFactoryImpl;
 import jp.co.ysinc.mojichange.ui.interfaces.Inputtable;
 import jp.co.ysinc.mojichange.ui.interfaces.Outputtable;
 
@@ -15,11 +19,11 @@ public class GameMaster {
     private Outputtable out;
 
     private Player player;
+
     private Resource resource;
-    private ScoreManager manager;
+    private ResourceFactory factory;
 
     public GameMaster(Inputtable in, Outputtable out) {
-        manager = new ScoreManager();
         this.in = in;
         this.out = out;
 
@@ -28,8 +32,8 @@ public class GameMaster {
 
     private void init() {
         this.player = new Player();
-        this.manager = new ScoreManager();
-        this.resource = ResourceFactory.newResource();
+        this.factory = new ResourceFactoryImpl();
+        this.resource = factory.mapStringResource();
     }
 
     public void startGame() {
@@ -38,7 +42,7 @@ public class GameMaster {
 
         System.out.println("main thread start !");
 
-        Timer timer = Timer.newInstace(20);
+        Timer timer = Timer.newInstance(20);
         timer.start(new CustomHandler());
 
         startGameLogic();
@@ -48,7 +52,7 @@ public class GameMaster {
         // 問題を出す
         Collections.shuffle(resource.question);
         for (String question : resource.question) {
-            out.show(new MojiCard(question).getQuestion());
+            out.show(new SentenceCard(question).toString());
             in.input();
         }
     }
@@ -88,7 +92,7 @@ public class GameMaster {
         }
     }
 
-    class CustomHandler implements Timer.TimerHandler {
+    private class CustomHandler implements Timer.TimerHandler {
         @Override
         public void countDown() {
 
