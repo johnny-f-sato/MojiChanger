@@ -1,7 +1,7 @@
 package jp.co.ysinc.mojichange.infrastructure;
 
 import com.google.gson.Gson;
-import jp.co.ysinc.mojichange.domain.entity.tools.Resource;
+import jp.co.ysinc.mojichange.domain.entity.tools.StringResource;
 import jp.co.ysinc.mojichange.domain.factory.ResourceFactory;
 import jp.co.ysinc.mojichange.resource.Config;
 
@@ -14,13 +14,13 @@ import java.io.FileReader;
  */
 public class ResourceFactoryImpl implements ResourceFactory {
     @Override
-    public Resource mapStringResource() {
+    public StringResource mapStringResource() {
         try {
             File file = new File(Config.MASTER_JSON_PATH);
             FileReader reader = new FileReader(file);
 
             Gson gson = new Gson();
-            return gson.fromJson(reader, Resource.class);
+            return gson.fromJson(reader, StringResource.class);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
 

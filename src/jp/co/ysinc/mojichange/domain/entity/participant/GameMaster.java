@@ -1,6 +1,6 @@
 package jp.co.ysinc.mojichange.domain.entity.participant;
 
-import jp.co.ysinc.mojichange.domain.entity.tools.Resource;
+import jp.co.ysinc.mojichange.domain.entity.tools.StringResource;
 import jp.co.ysinc.mojichange.domain.entity.tools.SentenceCard;
 import jp.co.ysinc.mojichange.domain.entity.tools.Timer;
 import jp.co.ysinc.mojichange.domain.factory.ResourceFactory;
@@ -20,7 +20,7 @@ public class GameMaster {
 
     private Player player;
 
-    private Resource resource;
+    private StringResource stringResource;
     private ResourceFactory factory;
 
     public GameMaster(Inputtable in, Outputtable out) {
@@ -33,7 +33,7 @@ public class GameMaster {
     private void init() {
         this.player = new Player();
         this.factory = new ResourceFactoryImpl();
-        this.resource = factory.mapStringResource();
+        this.stringResource = factory.mapStringResource();
     }
 
     public void startGame() {
@@ -50,15 +50,17 @@ public class GameMaster {
 
     private void startGameLogic() {
         // 問題を出す
-        Collections.shuffle(resource.question);
-        for (String question : resource.question) {
+        stringResource.specifyScene(StringResource.Scene.QUESTION);
+        Collections.shuffle(stringResource.provideResource());
+        for (String question : stringResource.provideResource()) {
             out.show(new SentenceCard(question).toString());
             in.input();
         }
     }
 
     private void showGameStart() {
-        for (String s : resource.game_start) {
+        stringResource.specifyScene(StringResource.Scene.GAME_START);
+        for (String s : stringResource.provideResource()) {
             out.show(s);
         }
 
@@ -68,8 +70,9 @@ public class GameMaster {
     private void showGameExplain() {
         String answer = "あぶらそば";
         String playerAnswer = "";
+        stringResource.specifyScene(StringResource.Scene.GAME_EXPLAIN);
 
-        for (String s : resource.game_explain) {
+        for (String s : stringResource.provideResource()) {
             if (s.contains("A. あぶらそば")) {
                 while (!answer.equals(playerAnswer)) {
                     playerAnswer = in.input();
