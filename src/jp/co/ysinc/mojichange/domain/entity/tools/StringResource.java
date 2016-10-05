@@ -1,6 +1,7 @@
 package jp.co.ysinc.mojichange.domain.entity.tools;
 
 import jp.co.ysinc.mojichange.domain.entity.tools.spec.Resource;
+import jp.co.ysinc.mojichange.domain.entity.tools.spec.Scene;
 
 import java.util.ArrayList;
 
@@ -14,18 +15,8 @@ public class StringResource implements Resource<ArrayList<String>> {
             game_explain,
             question;
 
-    private Scene scene;
-
-    public void specifyScene(Scene scene) {
-        this.scene = scene;
-    }
-
     @Override
-    public ArrayList<String> provideResource() {
-        if (scene == null) {
-            return new ArrayList<>();
-        }
-
+    public ArrayList<String> provideResource(Scene scene) {
         switch (scene) {
             case GAME_START:
                 return game_start;
@@ -38,17 +29,5 @@ public class StringResource implements Resource<ArrayList<String>> {
             default:
                 return new ArrayList<>();
         }
-    }
-
-    @Override
-    public String getUUID() {
-        return "StringResource";
-    }
-
-    public enum Scene {
-        GAME_START,
-        GAME_END,
-        GAME_EXPLAIN,
-        QUESTION,
     }
 }

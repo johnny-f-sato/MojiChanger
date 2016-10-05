@@ -8,16 +8,8 @@ public interface Resource<T> {
 
     /**
      *
-     * @param args argsをもとにリソースを返す
-     * @return 任意の型のリソースを返す
+     * @param args Sceneを指定する
+     * @return Sceneごとの任意の型を返す
      */
-    T provideResource();
-
-    /**
-     * リソース固有のIDを持つ。SHA256でハッシュ化してもいいかも
-     * @return リソース固有のID
-     */
-    String getUUID();
-
-
+    T provideResource(Scene scene);
 }

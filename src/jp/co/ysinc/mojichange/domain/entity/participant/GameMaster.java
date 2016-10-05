@@ -1,13 +1,15 @@
 package jp.co.ysinc.mojichange.domain.entity.participant;
 
-import jp.co.ysinc.mojichange.domain.entity.tools.StringResource;
 import jp.co.ysinc.mojichange.domain.entity.tools.SentenceCard;
 import jp.co.ysinc.mojichange.domain.entity.tools.Timer;
+import jp.co.ysinc.mojichange.domain.entity.tools.spec.Resource;
+import jp.co.ysinc.mojichange.domain.entity.tools.spec.Scene;
 import jp.co.ysinc.mojichange.domain.factory.ResourceFactory;
-import jp.co.ysinc.mojichange.infrastructure.ResourceFactoryImpl;
+import jp.co.ysinc.mojichange.domain.factory.StringResourceFactory;
 import jp.co.ysinc.mojichange.ui.interfaces.Inputtable;
 import jp.co.ysinc.mojichange.ui.interfaces.Outputtable;
 
+import java.util.ArrayList;
 import java.util.Collections;
 
 /**
@@ -20,8 +22,8 @@ public class GameMaster {
 
     private Player player;
 
-    private StringResource stringResource;
-    private ResourceFactory factory;
+    private ResourceFactory<ArrayList<String>> resourceFactory;
+    private Resource<ArrayList<String>> resource;
 
     public GameMaster(Inputtable in, Outputtable out) {
         this.in = in;
@@ -32,8 +34,8 @@ public class GameMaster {
 
     private void init() {
         this.player = new Player();
-        this.factory = new ResourceFactoryImpl();
-        this.stringResource = factory.mapStringResource();
+        this.resourceFactory = new StringResourceFactory();
+        this.resource = resourceFactory.create();
     }
 
     public void startGame() {
@@ -50,17 +52,15 @@ public class GameMaster {
 
     private void startGameLogic() {
         // 問題を出す
-        stringResource.specifyScene(StringResource.Scene.QUESTION);
-        Collections.shuffle(stringResource.provideResource());
-        for (String question : stringResource.provideResource()) {
+        Collections.shuffle(resource.provideResource(Scene.QUESTION));
+        for (String question : resource.provideResource(Scene.QUESTION)) {
             out.show(new SentenceCard(question).toString());
             in.input();
         }
     }
 
     private void showGameStart() {
-        stringResource.specifyScene(StringResource.Scene.GAME_START);
-        for (String s : stringResource.provideResource()) {
+        for (String s : resource.provideResource(Scene.GAME_START)) {
             out.show(s);
         }
 
@@ -70,9 +70,8 @@ public class GameMaster {
     private void showGameExplain() {
         String answer = "あぶらそば";
         String playerAnswer = "";
-        stringResource.specifyScene(StringResource.Scene.GAME_EXPLAIN);
 
-        for (String s : stringResource.provideResource()) {
+        for (String s : resource.provideResource(Scene.GAME_EXPLAIN)) {
             if (s.contains("A. あぶらそば")) {
                 while (!answer.equals(playerAnswer)) {
                     playerAnswer = in.input();
