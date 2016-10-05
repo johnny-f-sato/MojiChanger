@@ -1,4 +1,4 @@
-package jp.co.ysinc.mojichange.domain.entity;
+package jp.co.ysinc.mojichange.domain.entity.participant;
 
 /**
  * Created by Fumiya on 2016/04/02.

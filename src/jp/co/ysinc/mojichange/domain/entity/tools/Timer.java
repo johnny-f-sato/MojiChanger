@@ -1,4 +1,4 @@
-package jp.co.ysinc.mojichange.domain.entity;
+package jp.co.ysinc.mojichange.domain.entity.tools;
 
 /**
  * Created by Fumiya on 2016/04/02.
@@ -13,7 +13,7 @@ public class Timer {
         this.duration = duration;
     }
 
-    public static Timer newInstace(int duration) {
+    public static Timer newInstance(int duration) {
         if (timer == null) {
             timer = new Timer(duration);
         }
@@ -21,32 +21,25 @@ public class Timer {
         return timer;
     }
 
-    public void start(TimeUpHandler handler) {
+    public void start(TimerHandler handler) {
         thread = new Thread(() -> {
             for (int i=0; i < duration; i++) {
                 try {
                     Thread.sleep(1000);
-                    System.out.println(i+1);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
 
+            System.out.println();
             handler.timeUp();
         });
 
         thread.start();
     }
 
-    public void join() {
-        try {
-            thread.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public interface TimeUpHandler {
+    public interface TimerHandler {
+        void countDown();
         void timeUp();
     }
 

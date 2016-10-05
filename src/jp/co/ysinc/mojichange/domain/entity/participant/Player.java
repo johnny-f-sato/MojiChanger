@@ -1,4 +1,4 @@
-package jp.co.ysinc.mojichange.domain.entity;
+package jp.co.ysinc.mojichange.domain.entity.participant;
 
 import jp.co.ysinc.mojichange.domain.value_object.Score;
 
