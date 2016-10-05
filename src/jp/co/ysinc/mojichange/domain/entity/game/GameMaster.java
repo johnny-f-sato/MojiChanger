@@ -1,6 +1,5 @@
-package jp.co.ysinc.mojichange.domain.entity.participant;
+package jp.co.ysinc.mojichange.domain.entity.game;
 
-import jp.co.ysinc.mojichange.domain.entity.tools.SentenceCard;
 import jp.co.ysinc.mojichange.domain.entity.tools.Timer;
 import jp.co.ysinc.mojichange.domain.entity.tools.spec.Resource;
 import jp.co.ysinc.mojichange.domain.entity.tools.spec.Scene;

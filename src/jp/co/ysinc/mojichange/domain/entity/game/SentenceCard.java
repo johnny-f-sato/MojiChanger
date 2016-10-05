@@ -1,4 +1,4 @@
-package jp.co.ysinc.mojichange.domain.entity.tools;
+package jp.co.ysinc.mojichange.domain.entity.game;
 
 import jp.co.ysinc.mojichange.domain.entity.tools.core_logic.Operable;
 import jp.co.ysinc.mojichange.domain.entity.tools.core_logic.SimpleOperator;
