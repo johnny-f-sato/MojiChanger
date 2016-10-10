@@ -16,7 +16,7 @@ public class R {
         string = new GameDataMapper().mapStringData();
     }
 
-    public static R init() {
+    private static R init() {
         if (resource == null) {
             resource = new R();
         }
@@ -24,8 +24,10 @@ public class R {
         return resource;
     }
 
-    public StringResource string() {
-        return string;
+    public static StringResource string() {
+        init();
+
+        return resource.string;
     }
 
 }

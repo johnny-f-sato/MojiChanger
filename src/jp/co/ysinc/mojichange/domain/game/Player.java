@@ -12,11 +12,20 @@ public class Player {
 
     private Boolean isPlayContinuing;
 
-    public void setPlayerInfo(String name) {
+    protected Player(String name) {
+        playerInfo = new PlayerInfo(name);
+        score = new Score(0);
+    }
+
+    public void newScore(Score score) {
+        this.score = new Score(score.getPoint());
+    }
+
+    private void setPlayerInfo(String name) {
         this.playerInfo = new PlayerInfo(name);
     }
 
-    public PlayerInfo getPlayerName() {
+    public PlayerInfo getPlayerInfo() {
         return this.playerInfo;
     }
 

@@ -21,6 +21,7 @@ public class GameMaster {
 
     private Player player;
     private Resource<ArrayList<String>> resource;
+    private Timer timer;
 
     public GameMaster(Inputtable in, Outputtable out) {
         this.in = in;
@@ -30,9 +31,8 @@ public class GameMaster {
     }
 
     private void init() {
-        this.player = new Player();
-
-        this.resource = R.init().string();
+        this.resource = R.string();
+        this.timer = GameTimer.newInstance(30);
     }
 
     public void startGame() {
@@ -46,10 +46,10 @@ public class GameMaster {
            out.show("おわり");
         });
 
-        startGameLogic();
+        execGameLogic();
     }
 
-    private void startGameLogic() {
+    private void execGameLogic() {
         // 問題を出す
         Collections.shuffle(resource.provideResource(Scene.QUESTION));
         for (String question : resource.provideResource(Scene.QUESTION)) {
@@ -63,7 +63,7 @@ public class GameMaster {
             out.show(s);
         }
 
-        player.setPlayerInfo(in.input());
+        player = new Player(in.input());
     }
 
     private void showGameExplain() {
