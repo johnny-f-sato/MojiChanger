@@ -1,7 +1,7 @@
 package jp.co.ysinc.mojichange.application;
 
-import jp.co.ysinc.mojichange.domain.entity.game.GameMaster;
-import jp.co.ysinc.mojichange.ui.BufferedInput;
+import jp.co.ysinc.mojichange.domain.game.GameMaster;
+import jp.co.ysinc.mojichange.ui.Input;
 import jp.co.ysinc.mojichange.ui.Output;
 
 /**
@@ -9,7 +9,7 @@ import jp.co.ysinc.mojichange.ui.Output;
  */
 public class MojiChangeGame {
     public static void main(String[] arguments) {
-        GameMaster gm = new GameMaster(new BufferedInput(), new Output());
+        GameMaster gm = new GameMaster(new Input(), new Output());
         gm.startGame();
     }
 }

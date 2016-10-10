@@ -1,7 +1,7 @@
-package jp.co.ysinc.mojichange.domain.entity.tools;
+package jp.co.ysinc.mojichange.domain.tools.resources;
 
-import jp.co.ysinc.mojichange.domain.entity.tools.spec.Resource;
-import jp.co.ysinc.mojichange.domain.entity.tools.spec.Scene;
+import jp.co.ysinc.mojichange.domain.tools.spec.Resource;
+import jp.co.ysinc.mojichange.domain.tools.spec.Scene;
 
 import java.util.ArrayList;
 
@@ -9,11 +9,12 @@ import java.util.ArrayList;
  * Created by fumiya on 2016/08/26.
  */
 public class StringResource implements Resource<ArrayList<String>> {
-     public ArrayList<String>
-            game_start,
-            game_end,
-            game_explain,
-            question;
+
+    private ArrayList<String>
+        game_start,
+        game_end,
+        game_explain,
+        question;
 
     @Override
     public ArrayList<String> provideResource(Scene scene) {

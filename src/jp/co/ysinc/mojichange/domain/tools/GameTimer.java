@@ -1,27 +1,32 @@
-package jp.co.ysinc.mojichange.domain.entity.tools;
+package jp.co.ysinc.mojichange.domain.tools;
+
+import jp.co.ysinc.mojichange.domain.tools.event.OnAlarmListener;
+import jp.co.ysinc.mojichange.domain.tools.spec.Timer;
 
 /**
  * Created by Fumiya on 2016/04/02.
  */
-public class Timer {
+public class GameTimer implements Timer {
 
-    private static Timer timer;
+    private static GameTimer timer;
     private final int duration;
     private Thread thread;
 
-    private Timer(int duration) {
+    private GameTimer(int duration) {
         this.duration = duration;
     }
 
     public static Timer newInstance(int duration) {
         if (timer == null) {
-            timer = new Timer(duration);
+            timer = new GameTimer(duration);
         }
 
         return timer;
     }
 
-    public void start(TimerHandler handler) {
+
+    @Override
+    public void start(OnAlarmListener listener) {
         thread = new Thread(() -> {
             for (int i=0; i < duration; i++) {
                 try {
@@ -31,16 +36,11 @@ public class Timer {
                 }
             }
 
-            System.out.println();
-            handler.timeUp();
+            if (listener != null) {
+                listener.onRumble();
+            }
         });
 
         thread.start();
     }
-
-    public interface TimerHandler {
-        void countDown();
-        void timeUp();
-    }
-
 }

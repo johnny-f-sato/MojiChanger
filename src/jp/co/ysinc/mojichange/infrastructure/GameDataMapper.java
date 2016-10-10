@@ -1,22 +1,20 @@
-package jp.co.ysinc.mojichange.domain.factory;
+package jp.co.ysinc.mojichange.infrastructure;
 
 import com.google.gson.Gson;
-import jp.co.ysinc.mojichange.domain.entity.tools.StringResource;
-import jp.co.ysinc.mojichange.domain.entity.tools.spec.Resource;
+import jp.co.ysinc.mojichange.domain.tools.resources.StringResource;
 import jp.co.ysinc.mojichange.resource.Config;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.util.ArrayList;
 
 /**
- * Created by fumiya on 2016/10/06.
+ * Created by fumiya on 2016/10/10.
  */
-public class StringResourceFactory implements ResourceFactory<ArrayList<String>> {
-    @Override
-    public Resource<ArrayList<String>> create() {
-        StringResource resource = new StringResource();
+public class GameDataMapper {
+
+    public StringResource mapStringData() {
+        StringResource resource = null;
 
         try {
             File file = new File(Config.MASTER_JSON_PATH);
@@ -30,4 +28,5 @@ public class StringResourceFactory implements ResourceFactory<ArrayList<String>>
 
         return resource;
     }
+
 }

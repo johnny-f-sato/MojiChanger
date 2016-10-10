@@ -9,7 +9,7 @@ import java.io.InputStreamReader;
 /**
  * Created by Fumiya on 2016/04/02.
  */
-public class BufferedInput implements Inputtable {
+public class Input implements Inputtable {
     @Override
     public String input() {
         String str = "";

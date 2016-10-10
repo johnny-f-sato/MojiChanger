@@ -1,10 +1,10 @@
-package jp.co.ysinc.mojichange.domain.entity.game;
+package jp.co.ysinc.mojichange.domain.game;
 
-import jp.co.ysinc.mojichange.domain.entity.tools.Timer;
-import jp.co.ysinc.mojichange.domain.entity.tools.spec.Resource;
-import jp.co.ysinc.mojichange.domain.entity.tools.spec.Scene;
-import jp.co.ysinc.mojichange.domain.factory.ResourceFactory;
-import jp.co.ysinc.mojichange.domain.factory.StringResourceFactory;
+import jp.co.ysinc.mojichange.domain.tools.GameTimer;
+import jp.co.ysinc.mojichange.domain.tools.R;
+import jp.co.ysinc.mojichange.domain.tools.spec.Resource;
+import jp.co.ysinc.mojichange.domain.tools.spec.Scene;
+import jp.co.ysinc.mojichange.domain.tools.spec.Timer;
 import jp.co.ysinc.mojichange.ui.interfaces.Inputtable;
 import jp.co.ysinc.mojichange.ui.interfaces.Outputtable;
 
@@ -20,8 +20,6 @@ public class GameMaster {
     private Outputtable out;
 
     private Player player;
-
-    private ResourceFactory<ArrayList<String>> resourceFactory;
     private Resource<ArrayList<String>> resource;
 
     public GameMaster(Inputtable in, Outputtable out) {
@@ -33,18 +31,20 @@ public class GameMaster {
 
     private void init() {
         this.player = new Player();
-        this.resourceFactory = new StringResourceFactory();
-        this.resource = resourceFactory.create();
+
+        this.resource = R.init().string();
     }
 
     public void startGame() {
         showGameStart();
         showGameExplain();
 
-        System.out.println("main thread start !");
+        out.show("main thread start !");
 
-        Timer timer = Timer.newInstance(20);
-        timer.start(new CustomHandler());
+        Timer time = GameTimer.newInstance(10);
+        time.start(() -> {
+           out.show("おわり");
+        });
 
         startGameLogic();
     }
@@ -63,7 +63,7 @@ public class GameMaster {
             out.show(s);
         }
 
-        player.setPlayerName(in.input());
+        player.setPlayerInfo(in.input());
     }
 
     private void showGameExplain() {
@@ -83,26 +83,13 @@ public class GameMaster {
         while (true) {
             String isContinuing = in.input();
             if (isContinuing.equals("S")) {
-                player.setIsPlayContinuing(true);
+                player.notifyContinuePlaying(true);
                 return;
             }
 
             if (isContinuing.equals("E")) {
                 return;
             }
-        }
-    }
-
-    private class CustomHandler implements Timer.TimerHandler {
-        @Override
-        public void countDown() {
-
-        }
-
-        @Override
-        public void timeUp() {
-            out.show("sub thread end");
-            System.exit(0);
         }
     }
 }

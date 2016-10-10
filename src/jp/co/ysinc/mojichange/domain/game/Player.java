@@ -1,29 +1,30 @@
-package jp.co.ysinc.mojichange.domain.entity.game;
+package jp.co.ysinc.mojichange.domain.game;
 
-import jp.co.ysinc.mojichange.domain.value_object.Score;
+import jp.co.ysinc.mojichange.domain.game.value_object.PlayerInfo;
+import jp.co.ysinc.mojichange.domain.game.value_object.Score;
 
 /**
  * Created by Fumiya on 2016/04/02.
  */
 public class Player {
-    private String name;
+    private PlayerInfo playerInfo;
     private Score score;
 
     private Boolean isPlayContinuing;
 
-    public void setPlayerName(String name) {
-        this.name = name;
+    public void setPlayerInfo(String name) {
+        this.playerInfo = new PlayerInfo(name);
     }
 
-    public String getPlayerName() {
-        return this.name;
+    public PlayerInfo getPlayerName() {
+        return this.playerInfo;
     }
 
     public Score getScore() {
         return this.score;
     }
 
-    public void setIsPlayContinuing(Boolean isContinue) {
+    public void notifyContinuePlaying(Boolean isContinue) {
         this.isPlayContinuing = isContinue;
     }
 

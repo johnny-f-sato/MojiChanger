@@ -1,7 +1,7 @@
-package jp.co.ysinc.mojichange.domain.entity.game;
+package jp.co.ysinc.mojichange.domain.game;
 
-import jp.co.ysinc.mojichange.domain.entity.tools.core_logic.Operable;
-import jp.co.ysinc.mojichange.domain.entity.tools.core_logic.SimpleOperator;
+import jp.co.ysinc.mojichange.domain.tools.core_logic.Operable;
+import jp.co.ysinc.mojichange.domain.tools.core_logic.SimpleOperator;
 
 import java.util.List;
 

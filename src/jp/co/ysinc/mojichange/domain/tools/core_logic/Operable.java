@@ -1,4 +1,4 @@
-package jp.co.ysinc.mojichange.domain.entity.tools.core_logic;
+package jp.co.ysinc.mojichange.domain.tools.core_logic;
 
 import java.util.List;
 
