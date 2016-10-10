@@ -41,8 +41,7 @@ public class GameMaster {
 
         out.show("main thread start !");
 
-        Timer time = GameTimer.newInstance(10);
-        time.start(() -> {
+        timer.start(() -> {
            out.show("おわり");
         });
 

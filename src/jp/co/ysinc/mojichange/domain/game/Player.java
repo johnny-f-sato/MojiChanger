@@ -21,10 +21,6 @@ public class Player {
         this.score = new Score(score.getPoint());
     }
 
-    private void setPlayerInfo(String name) {
-        this.playerInfo = new PlayerInfo(name);
-    }
-
     public PlayerInfo getPlayerInfo() {
         return this.playerInfo;
     }
@@ -41,6 +37,7 @@ public class Player {
         if (isPlayContinuing == null) {
             return Boolean.FALSE;
         }
+
         return this.isPlayContinuing;
     }
 }
