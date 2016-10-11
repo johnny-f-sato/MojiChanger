@@ -1,5 +1,6 @@
 package jp.co.ysinc.mojichange.domain.game;
 
+import jp.co.ysinc.mojichange.domain.event.OnJudgeListener;
 import jp.co.ysinc.mojichange.domain.game.value_object.Score;
 
 /**
@@ -7,24 +8,28 @@ import jp.co.ysinc.mojichange.domain.game.value_object.Score;
  */
 public class ScoreManager {
 
-    private int point;
+    private int gamePoint;
+    private OnJudgeListener listener;
 
-    public void increment(String answer) {
-        point += answer.length() * 100;
-
-        plusBonusPoint(answer);
+    public ScoreManager() {
+        listener = new Juror();
     }
 
     public Player fixScore(Player player) {
-        Score score = new Score(point);
+        Score score = new Score(gamePoint);
         player.newScore(score);
 
         return player;
     }
 
+    private void increment(String answer) {
+        gamePoint += answer.length() * 100;
+        plusBonusPoint(answer);
+    }
+
     private void plusBonusPoint(String bonusAnswer) {
         if (bonusAnswer.length() > 10) {
-            point += bonusAnswer.length() * 200;
+            gamePoint += bonusAnswer.length() * 200;
         }
     }
 }

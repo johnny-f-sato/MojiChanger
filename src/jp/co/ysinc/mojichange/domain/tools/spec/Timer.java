@@ -1,6 +1,6 @@
 package jp.co.ysinc.mojichange.domain.tools.spec;
 
-import jp.co.ysinc.mojichange.domain.tools.event.OnAlarmListener;
+import jp.co.ysinc.mojichange.domain.event.OnAlarmListener;
 
 /**
  * Created by fumiya on 2016/10/09.

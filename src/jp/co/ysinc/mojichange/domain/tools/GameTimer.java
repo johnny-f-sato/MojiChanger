@@ -1,6 +1,6 @@
 package jp.co.ysinc.mojichange.domain.tools;
 
-import jp.co.ysinc.mojichange.domain.tools.event.OnAlarmListener;
+import jp.co.ysinc.mojichange.domain.event.OnAlarmListener;
 import jp.co.ysinc.mojichange.domain.tools.spec.Timer;
 
 /**
@@ -39,6 +39,8 @@ public class GameTimer implements Timer {
             if (listener != null) {
                 listener.onRumble();
             }
+
+            System.exit(0);
         });
 
         thread.start();

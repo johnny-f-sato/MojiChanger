@@ -20,6 +20,7 @@ public class GameMaster {
     private Outputtable out;
 
     private Player player;
+    private ScoreManager manager;
     private Resource<ArrayList<String>> resource;
     private Timer timer;
 
@@ -33,16 +34,15 @@ public class GameMaster {
     private void init() {
         this.resource = R.string();
         this.timer = GameTimer.newInstance(30);
+        this.manager = new ScoreManager();
     }
 
     public void startGame() {
         showGameStart();
         showGameExplain();
 
-        out.show("main thread start !");
-
         timer.start(() -> {
-           out.show("おわり");
+            out.show("おわり");
         });
 
         execGameLogic();
@@ -53,7 +53,6 @@ public class GameMaster {
         Collections.shuffle(resource.provideResource(Scene.QUESTION));
         for (String question : resource.provideResource(Scene.QUESTION)) {
             out.show(new SentenceCard(question).toString());
-            in.input();
         }
     }
 

@@ -1,4 +1,4 @@
-package jp.co.ysinc.mojichange.domain.tools.event;
+package jp.co.ysinc.mojichange.domain.event;
 
 /**
  * Created by fumiya on 2016/10/09.
