@@ -1,11 +1,10 @@
-package jp.co.ysinc.mojichange.domain.entity.participant;
+package jp.co.ysinc.mojichange.domain.game;
 
-import jp.co.ysinc.mojichange.domain.entity.tools.SentenceCard;
-import jp.co.ysinc.mojichange.domain.entity.tools.Timer;
-import jp.co.ysinc.mojichange.domain.entity.tools.spec.Resource;
-import jp.co.ysinc.mojichange.domain.entity.tools.spec.Scene;
-import jp.co.ysinc.mojichange.domain.factory.ResourceFactory;
-import jp.co.ysinc.mojichange.domain.factory.StringResourceFactory;
+import jp.co.ysinc.mojichange.domain.tools.GameTimer;
+import jp.co.ysinc.mojichange.domain.tools.R;
+import jp.co.ysinc.mojichange.domain.tools.spec.Resource;
+import jp.co.ysinc.mojichange.domain.tools.spec.Scene;
+import jp.co.ysinc.mojichange.domain.tools.spec.Timer;
 import jp.co.ysinc.mojichange.ui.interfaces.Inputtable;
 import jp.co.ysinc.mojichange.ui.interfaces.Outputtable;
 
@@ -21,9 +20,9 @@ public class GameMaster {
     private Outputtable out;
 
     private Player player;
-
-    private ResourceFactory<ArrayList<String>> resourceFactory;
+    private ScoreManager manager;
     private Resource<ArrayList<String>> resource;
+    private Timer timer;
 
     public GameMaster(Inputtable in, Outputtable out) {
         this.in = in;
@@ -33,29 +32,28 @@ public class GameMaster {
     }
 
     private void init() {
-        this.player = new Player();
-        this.resourceFactory = new StringResourceFactory();
-        this.resource = resourceFactory.create();
+        this.manager = new ScoreManager();
+
+        this.resource = R.string();
+        this.timer = GameTimer.newInstance(30);
     }
 
     public void startGame() {
         showGameStart();
         showGameExplain();
 
-        System.out.println("main thread start !");
+        timer.start(() -> {
+            out.show("おわり");
+        });
 
-        Timer timer = Timer.newInstance(20);
-        timer.start(new CustomHandler());
-
-        startGameLogic();
+        execGameLogic();
     }
 
-    private void startGameLogic() {
+    private void execGameLogic() {
         // 問題を出す
         Collections.shuffle(resource.provideResource(Scene.QUESTION));
         for (String question : resource.provideResource(Scene.QUESTION)) {
             out.show(new SentenceCard(question).toString());
-            in.input();
         }
     }
 
@@ -64,7 +62,7 @@ public class GameMaster {
             out.show(s);
         }
 
-        player.setPlayerName(in.input());
+        player = new Player(in.input());
     }
 
     private void showGameExplain() {
@@ -84,26 +82,13 @@ public class GameMaster {
         while (true) {
             String isContinuing = in.input();
             if (isContinuing.equals("S")) {
-                player.setIsPlayContinuing(true);
+                player.chooseContinuePlaying(true);
                 return;
             }
 
             if (isContinuing.equals("E")) {
                 return;
             }
-        }
-    }
-
-    private class CustomHandler implements Timer.TimerHandler {
-        @Override
-        public void countDown() {
-
-        }
-
-        @Override
-        public void timeUp() {
-            out.show("sub thread end");
-            System.exit(0);
         }
     }
 }

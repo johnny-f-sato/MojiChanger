@@ -1,4 +1,4 @@
-package jp.co.ysinc.mojichange.domain.entity.tools.spec;
+package jp.co.ysinc.mojichange.domain.tools.spec;
 
 /**
  * Created by fumiya on 2016/09/30.
