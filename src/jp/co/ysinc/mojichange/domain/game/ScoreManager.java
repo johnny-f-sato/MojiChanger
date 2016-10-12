@@ -1,6 +1,5 @@
 package jp.co.ysinc.mojichange.domain.game;
 
-import jp.co.ysinc.mojichange.domain.event.OnJudgeListener;
 import jp.co.ysinc.mojichange.domain.game.value_object.Score;
 
 /**
@@ -9,12 +8,7 @@ import jp.co.ysinc.mojichange.domain.game.value_object.Score;
 public class ScoreManager {
 
     private int gamePoint;
-    private OnJudgeListener listener;
-
-    public ScoreManager() {
-        listener = new Juror();
-    }
-
+    
     public Player fixScore(Player player) {
         Score score = new Score(gamePoint);
         player.newScore(score);

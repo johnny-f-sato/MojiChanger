@@ -32,9 +32,10 @@ public class GameMaster {
     }
 
     private void init() {
+        this.manager = new ScoreManager();
+
         this.resource = R.string();
         this.timer = GameTimer.newInstance(30);
-        this.manager = new ScoreManager();
     }
 
     public void startGame() {
@@ -81,7 +82,7 @@ public class GameMaster {
         while (true) {
             String isContinuing = in.input();
             if (isContinuing.equals("S")) {
-                player.notifyContinuePlaying(true);
+                player.chooseContinuePlaying(true);
                 return;
             }
 

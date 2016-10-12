@@ -29,7 +29,7 @@ public class Player {
         return this.score;
     }
 
-    public void notifyContinuePlaying(Boolean isContinue) {
+    public void chooseContinuePlaying(Boolean isContinue) {
         this.isPlayContinuing = isContinue;
     }
 
