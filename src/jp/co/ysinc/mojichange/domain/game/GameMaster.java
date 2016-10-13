@@ -43,7 +43,9 @@ public class GameMaster {
         showGameExplain();
 
         timer.start(() -> {
-            out.show("おわり");
+            player = manager.fixScore(player);
+            out.show( "player name: " + player.getPlayerInfo().getPlayerName()
+                    + "\nscore: " + player.getScore().getScore());
         });
 
         execGameLogic();
@@ -54,6 +56,8 @@ public class GameMaster {
         Collections.shuffle(resource.provideResource(Scene.QUESTION));
         for (String question : resource.provideResource(Scene.QUESTION)) {
             out.show(new SentenceCard(question).toString());
+            String answer = in.input();
+            judgeAnswer(question, answer);
         }
     }
 
@@ -89,6 +93,12 @@ public class GameMaster {
             if (isContinuing.equals("E")) {
                 return;
             }
+        }
+    }
+
+    private void judgeAnswer(String question, String answer) {
+        if (question.equals(answer)) {
+            manager.increment(answer);
         }
     }
 }

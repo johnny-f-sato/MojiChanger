@@ -16,7 +16,7 @@ public class ScoreManager {
         return player;
     }
 
-    private void increment(String answer) {
+    public void increment(String answer) {
         gamePoint += answer.length() * 100;
         plusBonusPoint(answer);
     }
@@ -26,4 +26,5 @@ public class ScoreManager {
             gamePoint += bonusAnswer.length() * 200;
         }
     }
+
 }
