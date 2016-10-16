@@ -16,7 +16,7 @@ public class Score implements Comparable<Score> {
         return score;
     }
 
-    public String getScore() {
+    public String getScorePoint() {
         return score + UNIT_NAME;
     }
 

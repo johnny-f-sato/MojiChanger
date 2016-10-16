@@ -5,8 +5,8 @@ import jp.co.ysinc.mojichange.domain.tools.R;
 import jp.co.ysinc.mojichange.domain.tools.spec.Resource;
 import jp.co.ysinc.mojichange.domain.tools.spec.Scene;
 import jp.co.ysinc.mojichange.domain.tools.spec.Timer;
-import jp.co.ysinc.mojichange.ui.interfaces.Inputtable;
-import jp.co.ysinc.mojichange.ui.interfaces.Outputtable;
+import jp.co.ysinc.mojichange.ui.FinishView;
+import jp.co.ysinc.mojichange.ui.NormalView;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -16,27 +16,23 @@ import java.util.Collections;
  */
 public class GameMaster {
 
-    private Inputtable in;
-    private Outputtable out;
+    private NormalView view;
+    private FinishView finishView;
 
-    private Player player;
-    private ScoreManager manager;
+    private Player                      player;
+    private ScoreManager                manager;
+    private Timer                       timer;
     private Resource<ArrayList<String>> resource;
-    private Timer timer;
 
-    public GameMaster(Inputtable in, Outputtable out) {
-        this.in = in;
-        this.out = out;
+    public GameMaster() {
+        this.view       = new NormalView();
+        this.finishView = new FinishView();
+        this.manager    = new ScoreManager();
 
-        init();
+        this.resource   = R.string();
+        this.timer      = GameTimer.newInstance(20);
     }
 
-    private void init() {
-        this.manager = new ScoreManager();
-
-        this.resource = R.string();
-        this.timer = GameTimer.newInstance(30);
-    }
 
     public void startGame() {
         showGameStart();
@@ -44,8 +40,8 @@ public class GameMaster {
 
         timer.start(() -> {
             player = manager.fixScore(player);
-            out.show( "player name: " + player.getPlayerInfo().getPlayerName()
-                    + "\nscore: " + player.getScore().getScore());
+            finishView.showResult(  player.getPlayerInfo().getPlayerName(),
+                                    player.getScore().getScorePoint());
         });
 
         execGameLogic();
@@ -55,18 +51,20 @@ public class GameMaster {
         // 問題を出す
         Collections.shuffle(resource.provideResource(Scene.QUESTION));
         for (String question : resource.provideResource(Scene.QUESTION)) {
-            out.show(new SentenceCard(question).toString());
-            String answer = in.input();
+            view.setText(new SentenceCard(question).toString());
+            view.output();
+            String answer = view.input();
             judgeAnswer(question, answer);
         }
     }
 
     private void showGameStart() {
         for (String s : resource.provideResource(Scene.GAME_START)) {
-            out.show(s);
+            view.setText(s);
+            view.output();
         }
 
-        player = new Player(in.input());
+        player = new Player(view.input());
     }
 
     private void showGameExplain() {
@@ -76,15 +74,16 @@ public class GameMaster {
         for (String s : resource.provideResource(Scene.GAME_EXPLAIN)) {
             if (s.contains("A. あぶらそば")) {
                 while (!answer.equals(playerAnswer)) {
-                    playerAnswer = in.input();
+                    playerAnswer = view.input();
                 }
             }
 
-            out.show(s);
+            view.setText(s);
+            view.output();
         }
 
         while (true) {
-            String isContinuing = in.input();
+            String isContinuing = view.input();
             if (isContinuing.equals("S")) {
                 player.chooseContinuePlaying(true);
                 return;
