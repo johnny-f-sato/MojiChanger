@@ -1,9 +1,9 @@
 package jp.co.ysinc.mojichange.domain.game;
 
 import jp.co.ysinc.mojichange.domain.tools.GameTimer;
-import jp.co.ysinc.mojichange.domain.tools.PlayerRepository;
+import jp.co.ysinc.mojichange.domain.repository.PlayerRepository;
 import jp.co.ysinc.mojichange.domain.tools.R;
-import jp.co.ysinc.mojichange.domain.tools.spec.PlayerRepositorySpec;
+import jp.co.ysinc.mojichange.domain.repository.spec.PlayerRepositorySpec;
 import jp.co.ysinc.mojichange.domain.tools.spec.Resource;
 import jp.co.ysinc.mojichange.domain.tools.spec.Scene;
 import jp.co.ysinc.mojichange.domain.tools.spec.Timer;
