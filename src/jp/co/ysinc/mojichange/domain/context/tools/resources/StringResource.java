@@ -1,7 +1,7 @@
-package jp.co.ysinc.mojichange.domain.tools.resources;
+package jp.co.ysinc.mojichange.domain.context.tools.resources;
 
-import jp.co.ysinc.mojichange.domain.tools.spec.Resource;
-import jp.co.ysinc.mojichange.domain.tools.spec.Scene;
+import jp.co.ysinc.mojichange.domain.context.tools.spec.Resource;
+import jp.co.ysinc.mojichange.domain.context.tools.spec.Scene;
 
 import java.util.ArrayList;
 

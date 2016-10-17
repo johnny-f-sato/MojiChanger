@@ -1,4 +1,4 @@
-package jp.co.ysinc.mojichange.domain.game.value_object;
+package jp.co.ysinc.mojichange.domain.context.game.value_object;
 
 import java.io.Serializable;
 import java.util.Objects;

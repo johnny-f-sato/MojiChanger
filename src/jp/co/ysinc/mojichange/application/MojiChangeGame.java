@@ -1,6 +1,6 @@
 package jp.co.ysinc.mojichange.application;
 
-import jp.co.ysinc.mojichange.domain.game.GameMaster;
+import jp.co.ysinc.mojichange.domain.context.game.GameMaster;
 
 /**
  * Created by Fumiya on 2016/04/02.

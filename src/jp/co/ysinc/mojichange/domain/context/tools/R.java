@@ -1,6 +1,6 @@
-package jp.co.ysinc.mojichange.domain.tools;
+package jp.co.ysinc.mojichange.domain.context.tools;
 
-import jp.co.ysinc.mojichange.domain.tools.resources.StringResource;
+import jp.co.ysinc.mojichange.domain.context.tools.resources.StringResource;
 import jp.co.ysinc.mojichange.infrastructure.GameDataMapper;
 
 /**

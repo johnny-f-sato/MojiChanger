@@ -1,6 +1,6 @@
 package jp.co.ysinc.mojichange.domain.repository.spec;
 
-import jp.co.ysinc.mojichange.domain.game.Player;
+import jp.co.ysinc.mojichange.domain.context.game.Player;
 
 /**
  * Created by fumiya on 2016/10/18.

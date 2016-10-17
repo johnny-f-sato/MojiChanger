@@ -1,7 +1,7 @@
 package jp.co.ysinc.mojichange.infrastructure;
 
 import com.google.gson.Gson;
-import jp.co.ysinc.mojichange.domain.tools.resources.StringResource;
+import jp.co.ysinc.mojichange.domain.context.tools.resources.StringResource;
 import jp.co.ysinc.mojichange.resource.Config;
 
 import java.io.File;

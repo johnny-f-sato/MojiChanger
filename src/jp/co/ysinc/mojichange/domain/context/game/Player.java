@@ -1,7 +1,7 @@
-package jp.co.ysinc.mojichange.domain.game;
+package jp.co.ysinc.mojichange.domain.context.game;
 
-import jp.co.ysinc.mojichange.domain.game.value_object.PlayerInfo;
-import jp.co.ysinc.mojichange.domain.game.value_object.Score;
+import jp.co.ysinc.mojichange.domain.context.game.value_object.PlayerInfo;
+import jp.co.ysinc.mojichange.domain.context.game.value_object.Score;
 
 import java.io.Serializable;
 

@@ -1,6 +1,6 @@
-package jp.co.ysinc.mojichange.domain.game;
+package jp.co.ysinc.mojichange.domain.context.game;
 
-import jp.co.ysinc.mojichange.domain.game.value_object.Score;
+import jp.co.ysinc.mojichange.domain.context.game.value_object.Score;
 
 /**
  * Created by Fumiya on 2016/04/02.

@@ -1,7 +1,7 @@
-package jp.co.ysinc.mojichange.domain.tools;
+package jp.co.ysinc.mojichange.domain.context.tools;
 
 import jp.co.ysinc.mojichange.domain.event.OnAlarmListener;
-import jp.co.ysinc.mojichange.domain.tools.spec.Timer;
+import jp.co.ysinc.mojichange.domain.context.tools.spec.Timer;
 
 /**
  * Created by Fumiya on 2016/04/02.

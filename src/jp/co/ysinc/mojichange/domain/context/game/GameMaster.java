@@ -1,12 +1,12 @@
-package jp.co.ysinc.mojichange.domain.game;
+package jp.co.ysinc.mojichange.domain.context.game;
 
-import jp.co.ysinc.mojichange.domain.tools.GameTimer;
+import jp.co.ysinc.mojichange.domain.context.tools.GameTimer;
 import jp.co.ysinc.mojichange.domain.repository.PlayerRepository;
-import jp.co.ysinc.mojichange.domain.tools.R;
+import jp.co.ysinc.mojichange.domain.context.tools.R;
 import jp.co.ysinc.mojichange.domain.repository.spec.PlayerRepositorySpec;
-import jp.co.ysinc.mojichange.domain.tools.spec.Resource;
-import jp.co.ysinc.mojichange.domain.tools.spec.Scene;
-import jp.co.ysinc.mojichange.domain.tools.spec.Timer;
+import jp.co.ysinc.mojichange.domain.context.tools.spec.Resource;
+import jp.co.ysinc.mojichange.domain.context.tools.spec.Scene;
+import jp.co.ysinc.mojichange.domain.context.tools.spec.Timer;
 import jp.co.ysinc.mojichange.ui.FinishView;
 import jp.co.ysinc.mojichange.ui.NormalView;
 

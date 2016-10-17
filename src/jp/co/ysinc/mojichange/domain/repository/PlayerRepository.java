@@ -1,6 +1,6 @@
 package jp.co.ysinc.mojichange.domain.repository;
 
-import jp.co.ysinc.mojichange.domain.game.Player;
+import jp.co.ysinc.mojichange.domain.context.game.Player;
 import jp.co.ysinc.mojichange.domain.repository.spec.PlayerRepositorySpec;
 import jp.co.ysinc.mojichange.infrastructure.DataRepository;
 
