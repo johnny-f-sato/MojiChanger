@@ -1,9 +1,11 @@
 package jp.co.ysinc.mojichange.domain.game.value_object;
 
+import java.io.Serializable;
+
 /**
  * Created by fumiya on 2016/10/09.
  */
-public class Score implements Comparable<Score> {
+public class Score implements Comparable<Score>, Serializable {
     private static final String UNIT_NAME = "pt";
 
     private final int score;

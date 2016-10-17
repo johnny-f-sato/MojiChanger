@@ -1,11 +1,12 @@
 package jp.co.ysinc.mojichange.domain.game.value_object;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
  * Created by fumiya on 2016/10/09.
  */
-public class PlayerInfo implements Comparable<PlayerInfo> {
+public class PlayerInfo implements Comparable<PlayerInfo>, Serializable {
 
     private int playerId;
     private String playerName;
@@ -24,7 +25,7 @@ public class PlayerInfo implements Comparable<PlayerInfo> {
     }
 
     private void generatePlayerId() {
-        playerId = Objects.hash(this, playerName);;
+        playerId = Objects.hash(this, playerName);
     }
 
 

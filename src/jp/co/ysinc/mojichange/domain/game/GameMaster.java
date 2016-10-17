@@ -1,7 +1,9 @@
 package jp.co.ysinc.mojichange.domain.game;
 
 import jp.co.ysinc.mojichange.domain.tools.GameTimer;
+import jp.co.ysinc.mojichange.domain.tools.PlayerRepository;
 import jp.co.ysinc.mojichange.domain.tools.R;
+import jp.co.ysinc.mojichange.domain.tools.spec.PlayerRepositorySpec;
 import jp.co.ysinc.mojichange.domain.tools.spec.Resource;
 import jp.co.ysinc.mojichange.domain.tools.spec.Scene;
 import jp.co.ysinc.mojichange.domain.tools.spec.Timer;
@@ -24,6 +26,8 @@ public class GameMaster {
     private Timer                       timer;
     private Resource<ArrayList<String>> resource;
 
+    private PlayerRepositorySpec repository;
+
     public GameMaster() {
         this.view       = new NormalView();
         this.finishView = new FinishView();
@@ -31,6 +35,8 @@ public class GameMaster {
 
         this.resource   = R.string();
         this.timer      = GameTimer.newInstance(20);
+
+        this.repository = new PlayerRepository();
     }
 
 
@@ -38,10 +44,17 @@ public class GameMaster {
         showGameStart();
         showGameExplain();
 
+        if (!player.isContinuePlaying()) {
+            System.exit(1);
+            return;
+        }
+
         timer.start(() -> {
             player = manager.fixScore(player);
             finishView.showResult(  player.getPlayerInfo().getPlayerName(),
                                     player.getScore().getScorePoint());
+
+            repository.save(player);
         });
 
         execGameLogic();

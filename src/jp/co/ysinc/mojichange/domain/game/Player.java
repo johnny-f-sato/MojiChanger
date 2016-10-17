@@ -3,10 +3,14 @@ package jp.co.ysinc.mojichange.domain.game;
 import jp.co.ysinc.mojichange.domain.game.value_object.PlayerInfo;
 import jp.co.ysinc.mojichange.domain.game.value_object.Score;
 
+import java.io.Serializable;
+
 /**
  * Created by Fumiya on 2016/04/02.
  */
-public class Player {
+public class Player implements Serializable {
+    private static final long serialVersionUID = 100L;
+
     private PlayerInfo playerInfo;
     private Score score;
 
