@@ -20,6 +20,7 @@ public class PlayerRepository implements PlayerRepositorySpec {
 
     @Override
     public Player find() {
-        return null;
+        DataRepository<Player> repository = new DataRepository<>();
+        return repository.once();
     }
 }

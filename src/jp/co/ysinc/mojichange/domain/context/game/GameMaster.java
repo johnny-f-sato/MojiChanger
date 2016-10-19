@@ -8,6 +8,7 @@ import jp.co.ysinc.mojichange.domain.context.tools.spec.Resource;
 import jp.co.ysinc.mojichange.domain.context.tools.spec.Scene;
 import jp.co.ysinc.mojichange.domain.context.tools.spec.Timer;
 import jp.co.ysinc.mojichange.ui.FinishView;
+import jp.co.ysinc.mojichange.ui.LastTimeRecordView;
 import jp.co.ysinc.mojichange.ui.NormalView;
 
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ import java.util.Collections;
  */
 public class GameMaster {
 
+    private LastTimeRecordView lastTimeView;
     private NormalView view;
     private FinishView finishView;
 
@@ -29,9 +31,10 @@ public class GameMaster {
     private PlayerRepositorySpec repository;
 
     public GameMaster() {
-        this.view       = new NormalView();
-        this.finishView = new FinishView();
-        this.manager    = new ScoreManager();
+        this.lastTimeView   = new LastTimeRecordView();
+        this.view           = new NormalView();
+        this.finishView     = new FinishView();
+        this.manager        = new ScoreManager();
 
         this.resource   = R.string();
         this.timer      = GameTimer.newInstance(20);
@@ -72,6 +75,16 @@ public class GameMaster {
     }
 
     private void showGameStart() {
+        Player prePlayer = repository.find();
+        if (prePlayer != null) {
+            lastTimeView.setText(
+                    " name: " + prePlayer.getPlayerInfo().getPlayerName()
+                    + "\n" +
+                    "score: " + prePlayer.getScore().getScorePoint()
+            );
+            lastTimeView.output();
+        }
+
         for (String s : resource.provideResource(Scene.GAME_START)) {
             view.setText(s);
             view.output();
