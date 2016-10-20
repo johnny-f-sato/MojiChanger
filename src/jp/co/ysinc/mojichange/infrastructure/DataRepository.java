@@ -11,7 +11,7 @@ import java.util.Objects;
 //TODO もっと汎用性の高いやつにする
 public class DataRepository<T> {
 
-    public void saveObject(T target, String fileName) throws IllegalArgumentException {
+    public void save(T target, String fileName) throws IllegalArgumentException {
         // Serializableを実装していなければIllegalArgumentError
         if (!(target instanceof Serializable)) {
             throw new IllegalArgumentException( "this argument doesn't implements Serializable." +
@@ -37,28 +37,9 @@ public class DataRepository<T> {
         }
     }
 
-    // 最新の１件取得する
+    // 最新のオブジェクトを１件取得する
     public T once() {
-        String directoryPath = Config.SAVE_DATA_STORE;
-        File root =  new File(directoryPath);
-        File[] directory = root.listFiles();
-
-        if (directory == null) {
-            return null;
-        }
-
-        // 最新のファイルを取得する
-        File lastFile = null;
-        for (File file : directory) {
-            if (lastFile == null) {
-                lastFile = file;
-            }
-
-            if (file.lastModified() > lastFile.lastModified()) {
-                lastFile = file;
-            }
-        }
-
+        File lastFile = getOnceFile(getSaveDirectory());
         if (lastFile == null) {
             return null;
         }
@@ -77,6 +58,29 @@ public class DataRepository<T> {
         }
 
         return null;
+    }
+
+    private File getOnceFile(File[] directory) {
+        // 最新のファイルを1件取得する
+        File lastFile = null;
+        for (File file : directory) {
+            if (lastFile == null) {
+                lastFile = file;
+            }
+
+            if (file.lastModified() > lastFile.lastModified()) {
+                lastFile = file;
+            }
+        }
+
+        return lastFile;
+    }
+
+    private File[] getSaveDirectory() {
+        String directoryPath = Config.SAVE_DATA_STORE;
+        File root =  new File(directoryPath);
+
+        return root.listFiles();
     }
 
 }

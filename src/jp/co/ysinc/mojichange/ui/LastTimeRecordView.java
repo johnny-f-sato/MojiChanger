@@ -9,8 +9,8 @@ public class LastTimeRecordView extends CUIView {
 
     @Override
     public void output() {
-        System.out.println("・～・～・・～・～・前回のスコア・～・～・・～・～・");
+        System.out.println("・～・～・前回のスコア・～・～・～");
         System.out.println(this.outString);
-        System.out.println("・～・～・・～・～・・～・～・・～・～・・～・～・～・");
+        System.out.println("・～・～・～・～・～・～・～・～・");
     }
 }

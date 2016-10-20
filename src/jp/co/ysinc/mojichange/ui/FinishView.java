@@ -12,7 +12,7 @@ public class FinishView extends CUIView {
     @Override
     public void output() {
         System.out.println();
-        System.out.println("------------ 獲得ポイント ------------");
+        System.out.println("------------ result ------------");
         System.out.println( "player name: " + name + "\n" +
                             "Total score: " + score);
         System.out.println("------------ おわり ------------");

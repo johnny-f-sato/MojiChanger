@@ -15,7 +15,7 @@ public class PlayerRepository implements PlayerRepositorySpec {
 
         String filename = String.valueOf(player.getPlayerInfo().getPlayerId());
 
-        repository.saveObject(player, filename);
+        repository.save(player, filename);
     }
 
     @Override
