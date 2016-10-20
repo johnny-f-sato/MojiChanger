@@ -1,11 +1,14 @@
-package jp.co.ysinc.mojichange.domain.game;
+package jp.co.ysinc.mojichange.domain.context.game;
 
-import jp.co.ysinc.mojichange.domain.tools.GameTimer;
-import jp.co.ysinc.mojichange.domain.tools.R;
-import jp.co.ysinc.mojichange.domain.tools.spec.Resource;
-import jp.co.ysinc.mojichange.domain.tools.spec.Scene;
-import jp.co.ysinc.mojichange.domain.tools.spec.Timer;
+import jp.co.ysinc.mojichange.domain.context.tools.GameTimer;
+import jp.co.ysinc.mojichange.domain.repository.PlayerRepository;
+import jp.co.ysinc.mojichange.domain.context.tools.R;
+import jp.co.ysinc.mojichange.domain.repository.spec.PlayerRepositorySpec;
+import jp.co.ysinc.mojichange.domain.context.tools.spec.Resource;
+import jp.co.ysinc.mojichange.domain.context.tools.spec.Scene;
+import jp.co.ysinc.mojichange.domain.context.tools.spec.Timer;
 import jp.co.ysinc.mojichange.ui.FinishView;
+import jp.co.ysinc.mojichange.ui.LastTimeRecordView;
 import jp.co.ysinc.mojichange.ui.NormalView;
 
 import java.util.ArrayList;
@@ -16,6 +19,7 @@ import java.util.Collections;
  */
 public class GameMaster {
 
+    private LastTimeRecordView lastTimeView;
     private NormalView view;
     private FinishView finishView;
 
@@ -24,13 +28,18 @@ public class GameMaster {
     private Timer                       timer;
     private Resource<ArrayList<String>> resource;
 
+    private PlayerRepositorySpec playerRepository;
+
     public GameMaster() {
-        this.view       = new NormalView();
-        this.finishView = new FinishView();
-        this.manager    = new ScoreManager();
+        this.lastTimeView   = new LastTimeRecordView();
+        this.view           = new NormalView();
+        this.finishView     = new FinishView();
+        this.manager        = new ScoreManager();
 
         this.resource   = R.string();
         this.timer      = GameTimer.newInstance(20);
+
+        this.playerRepository = new PlayerRepository();
     }
 
 
@@ -38,10 +47,17 @@ public class GameMaster {
         showGameStart();
         showGameExplain();
 
+        if (!player.isContinuePlaying()) {
+            System.exit(1);
+            return;
+        }
+
         timer.start(() -> {
             player = manager.fixScore(player);
             finishView.showResult(  player.getPlayerInfo().getPlayerName(),
                                     player.getScore().getScorePoint());
+
+            playerRepository.save(player);
         });
 
         execGameLogic();
@@ -59,6 +75,16 @@ public class GameMaster {
     }
 
     private void showGameStart() {
+        Player prePlayer = playerRepository.find();
+        if (prePlayer != null) {
+            lastTimeView.setText(
+                    " name: " + prePlayer.getPlayerInfo().getPlayerName()
+                    + "\n" +
+                    "score: " + prePlayer.getScore().getScorePoint()
+            );
+            lastTimeView.output();
+        }
+
         for (String s : resource.provideResource(Scene.GAME_START)) {
             view.setText(s);
             view.output();

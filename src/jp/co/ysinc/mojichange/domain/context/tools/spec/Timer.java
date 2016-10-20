@@ -1,4 +1,4 @@
-package jp.co.ysinc.mojichange.domain.tools.spec;
+package jp.co.ysinc.mojichange.domain.context.tools.spec;
 
 import jp.co.ysinc.mojichange.domain.event.OnAlarmListener;
 
