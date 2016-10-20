@@ -28,7 +28,7 @@ public class GameMaster {
     private Timer                       timer;
     private Resource<ArrayList<String>> resource;
 
-    private PlayerRepositorySpec repository;
+    private PlayerRepositorySpec playerRepository;
 
     public GameMaster() {
         this.lastTimeView   = new LastTimeRecordView();
@@ -39,7 +39,7 @@ public class GameMaster {
         this.resource   = R.string();
         this.timer      = GameTimer.newInstance(20);
 
-        this.repository = new PlayerRepository();
+        this.playerRepository = new PlayerRepository();
     }
 
 
@@ -57,7 +57,7 @@ public class GameMaster {
             finishView.showResult(  player.getPlayerInfo().getPlayerName(),
                                     player.getScore().getScorePoint());
 
-            repository.save(player);
+            playerRepository.save(player);
         });
 
         execGameLogic();
@@ -75,7 +75,7 @@ public class GameMaster {
     }
 
     private void showGameStart() {
-        Player prePlayer = repository.find();
+        Player prePlayer = playerRepository.find();
         if (prePlayer != null) {
             lastTimeView.setText(
                     " name: " + prePlayer.getPlayerInfo().getPlayerName()
