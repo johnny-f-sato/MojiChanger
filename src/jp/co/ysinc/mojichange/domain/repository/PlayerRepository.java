@@ -11,10 +11,9 @@ public class PlayerRepository implements PlayerRepositorySpec {
 
     @Override
     public void save(Player player) {
-        DataRepository<Player> repository = new DataRepository<>();
-
         String filename = String.valueOf(player.getPlayerInfo().getPlayerId());
 
+        DataRepository<Player> repository = new DataRepository<>();
         repository.save(player, filename);
     }
 

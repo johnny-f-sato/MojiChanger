@@ -11,7 +11,7 @@ import java.util.Objects;
 //TODO もっと汎用性の高いやつにする
 public class DataRepository<T> {
 
-    public void save(T target, String fileName) throws IllegalArgumentException {
+    public void save(T target, String fileName) {
         // Serializableを実装していなければIllegalArgumentError
         if (!(target instanceof Serializable)) {
             throw new IllegalArgumentException( "this argument doesn't implements Serializable." +
