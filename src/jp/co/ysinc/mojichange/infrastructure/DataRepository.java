@@ -79,6 +79,7 @@ public class DataRepository<T> {
     private File[] getSaveDirectory() {
         String directoryPath = Config.SAVE_DATA_STORE;
         File root =  new File(directoryPath);
+        root.mkdirs();
 
         return root.listFiles();
     }
