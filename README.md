@@ -10,9 +10,9 @@ Java 研修用のCUIゲームプロジェクト
 ## Usage
 - Javaをインストールしていることが前提です。
 
-- sourcetreeをインストールする
-Gitクライアントソフトであれば何でも良いです。
-Windowsユーザーは特にクライアントがあると git がバンドルされてくるので、別途インストールする手間が省けます。
+- sourcetreeをインストールする  
+Gitクライアントソフトであれば何でも良いです。  
+Windowsユーザーは特にクライアントがあると git がバンドルされてくるので、別途インストールする手間が省けます。  
 https://ja.atlassian.com/software/sourcetree
 
 - sourcetreeのターミナルを起動する
@@ -25,14 +25,13 @@ https://ja.atlassian.com/software/sourcetree
 ~/project$ git pull https://github.com/johnny-f-sato/MojiChanger.git
 ```
 
-- IntelliJをインストールする（まだIntelliJを入れてなければ）
-このページからダウンロードし、適宜インストールしてください。
-デフォルトの設定で進めていって問題ありません。
+- IntelliJをインストールする（まだIntelliJを入れてなければ）  
+このページからダウンロードし、適宜インストールしてください。  
+デフォルトの設定で進めていって問題ありません。  
 https://www.jetbrains.com/idea/
 
-- IntelliJを起動後、プロジェクトをインポートする
+- IntelliJを起動後、プロジェクトをインポートする  
 File -> New -> Project from existing source を選択
-
 
 ## intelliJで困ったら
 - File -> Invalidate Caches / Restartを試してみよう
